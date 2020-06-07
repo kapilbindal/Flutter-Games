@@ -7,6 +7,7 @@ bool allowClick = false;
 String hideImagePath = "assets/animals/question.png";
 String selectedImagePath = "";
 int selectedImageIndex;
+String theme = "";
 List<CardModel> pairs = List<CardModel>();
 
 void hideAllPairs(List<CardModel> visibleList) {
@@ -15,7 +16,7 @@ void hideAllPairs(List<CardModel> visibleList) {
   }
 }
 
-List<CardModel> getPairs() {
+List<CardModel> getAnimalPairs() {
   List<CardModel> pairs = List<CardModel>();
   List<String> imgNames = [
     "dog",
@@ -28,12 +29,46 @@ List<CardModel> getPairs() {
     "zebra"
   ];
   for (int i = 0; i < imgNames.length; i++) {
-    CardModel card = CardModel();
-    card.setImagePath("assets/animals/" + imgNames[i] + ".png");
-    card.setIsSelected(true);
-    card.setIsMatched(false);
-    pairs.add(card);
-    pairs.add(card);
+    CardModel cardCopy1 = CardModel();
+    cardCopy1.setImagePath("assets/animals/" + imgNames[i] + ".png");
+    cardCopy1.setIsSelected(true);
+    cardCopy1.setIsMatched(false);
+    pairs.add(cardCopy1);
+    CardModel cardCopy2 = CardModel();
+    cardCopy2.setImagePath("assets/animals/" + imgNames[i] + ".png");
+    cardCopy2.setIsSelected(true);
+    cardCopy2.setIsMatched(false);
+    pairs.add(cardCopy2);
+  }
+  return pairs;
+}
+
+List<CardModel> getCelebPairs() {
+  List<CardModel> pairs = List<CardModel>();
+  List<String> imgNames = [
+    "virat_1",
+    "anushka_1",
+    "priyanka_2",
+    "nick_2",
+    "deepika_3",
+    "ranveer_3",
+    "divyanka_4",
+    "vivek_4",
+    "yuvi_5",
+    "hazel_5",
+    "shahid_6",
+    "mira_6",
+    "kareena_7",
+    "saif_7",
+    "hardik_8",
+    "natasha_8",
+  ];
+  for (int i = 0; i < imgNames.length; i++) {
+    CardModel cardCopy1 = CardModel();
+    cardCopy1.setImagePath("assets/celebrity/" + imgNames[i] + ".png");
+    cardCopy1.setIsSelected(true);
+    cardCopy1.setIsMatched(false);
+    pairs.add(cardCopy1);
   }
   return pairs;
 }
