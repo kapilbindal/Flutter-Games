@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:memory_monarch/utils/constants/strings.dart';
 
 class CustomCardView extends StatelessWidget {
   double height, width, fontSize;
@@ -11,10 +12,10 @@ class CustomCardView extends StatelessWidget {
     this.width,
     this.text,
     this.fontColor,
-    this.backColor,
+    this.backColor = Colors.white,
     this.tileColor,
-    this.fontFamily,
-    this.fontSize,
+    this.fontFamily = Strings.font_family,
+    this.fontSize = 35.0,
     this.showTile = false,
   });
   @override
@@ -27,11 +28,16 @@ class CustomCardView extends StatelessWidget {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10.0),
         ),
-        elevation: 5.0,
+        elevation: 10.0,
         color: backColor,
         child: Row(
           children: <Widget>[
-            showTile ? Container(color: tileColor, width: 30) : Container(),
+            showTile
+                ? Container(
+                    color: tileColor,
+                    width: 30,
+                  )
+                : Container(),
             Expanded(
               child: Center(
                 child: Text(

@@ -1,23 +1,24 @@
-import 'package:memory_monarch/models/card.dart';
+import 'package:memory_monarch/models/tile.dart';
+import 'package:memory_monarch/utils/constants/strings.dart';
 
 int viewPoints = 0;
 int totalPoints = 0;
 int flipCount = 30;
 bool allowClick = false;
-String hideImagePath = "assets/animals/question.png";
+String hideImagePath = Strings.question_img_path;
 String selectedImagePath = "";
 int selectedImageIndex;
 String theme = "";
-List<CardModel> pairs = List<CardModel>();
+List<TileModel> pairs = List<TileModel>();
 
-void hideAllPairs(List<CardModel> visibleList) {
+void hideAllPairs(List<TileModel> visibleList) {
   for (int i = 0; i < visibleList.length; i++) {
     visibleList[i].setIsSelected(false);
   }
 }
 
-List<CardModel> getAnimalPairs() {
-  List<CardModel> pairs = List<CardModel>();
+List<TileModel> getAnimalPairs() {
+  List<TileModel> pairs = List<TileModel>();
   List<String> imgNames = [
     "dog",
     "frog",
@@ -29,13 +30,13 @@ List<CardModel> getAnimalPairs() {
     "zebra"
   ];
   for (int i = 0; i < imgNames.length; i++) {
-    CardModel cardCopy1 = CardModel();
-    cardCopy1.setImagePath("assets/animals/" + imgNames[i] + ".png");
+    TileModel cardCopy1 = TileModel();
+    cardCopy1.setImagePath(Strings.animal_img_dir_path + imgNames[i] + ".png");
     cardCopy1.setIsSelected(true);
     cardCopy1.setIsMatched(false);
     pairs.add(cardCopy1);
-    CardModel cardCopy2 = CardModel();
-    cardCopy2.setImagePath("assets/animals/" + imgNames[i] + ".png");
+    TileModel cardCopy2 = TileModel();
+    cardCopy2.setImagePath(Strings.animal_img_dir_path + imgNames[i] + ".png");
     cardCopy2.setIsSelected(true);
     cardCopy2.setIsMatched(false);
     pairs.add(cardCopy2);
@@ -43,8 +44,8 @@ List<CardModel> getAnimalPairs() {
   return pairs;
 }
 
-List<CardModel> getCelebPairs() {
-  List<CardModel> pairs = List<CardModel>();
+List<TileModel> getCelebPairs() {
+  List<TileModel> pairs = List<TileModel>();
   List<String> imgNames = [
     "virat_1",
     "anushka_1",
@@ -52,8 +53,8 @@ List<CardModel> getCelebPairs() {
     "nick_2",
     "deepika_3",
     "ranveer_3",
-    "divyanka_4",
-    "vivek_4",
+    "aishwarya_4",
+    "abhishek_4",
     "yuvi_5",
     "hazel_5",
     "shahid_6",
@@ -64,8 +65,8 @@ List<CardModel> getCelebPairs() {
     "natasha_8",
   ];
   for (int i = 0; i < imgNames.length; i++) {
-    CardModel cardCopy1 = CardModel();
-    cardCopy1.setImagePath("assets/celebrity/" + imgNames[i] + ".png");
+    TileModel cardCopy1 = TileModel();
+    cardCopy1.setImagePath(Strings.celeb_img_dir_path + imgNames[i] + ".png");
     cardCopy1.setIsSelected(true);
     cardCopy1.setIsMatched(false);
     pairs.add(cardCopy1);

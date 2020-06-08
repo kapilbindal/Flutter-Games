@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:memory_monarch/cardView.dart';
 import 'package:memory_monarch/data/data.dart';
-import 'package:memory_monarch/gameOverView.dart';
-import 'package:memory_monarch/models/card.dart';
+import 'package:memory_monarch/models/tile.dart';
+import 'package:memory_monarch/utils/constants/strings.dart';
+import 'package:memory_monarch/views/game/widgets/gameOverView.dart';
+import 'package:memory_monarch/views/game/widgets/tileView.dart';
 
 class GameView extends StatefulWidget {
   Function callbackMain;
@@ -12,8 +13,8 @@ class GameView extends StatefulWidget {
 }
 
 class _GameViewState extends State<GameView> {
-  List<CardModel> visiblePairs = List<CardModel>();
-  List<CardModel> questionPairs = List<CardModel>();
+  List<TileModel> visiblePairs = List<TileModel>();
+  List<TileModel> questionPairs = List<TileModel>();
 
   @override
   void initState() {
@@ -22,7 +23,9 @@ class _GameViewState extends State<GameView> {
   }
 
   void restart() {
-    pairs = theme == "zoo" ? getAnimalPairs() : getCelebPairs(); // sab True
+    pairs = theme == Strings.theme_zoo
+        ? getAnimalPairs()
+        : getCelebPairs(); // sab True
     pairs.shuffle();
     visiblePairs = pairs;
     viewPoints = 0;
@@ -37,7 +40,7 @@ class _GameViewState extends State<GameView> {
     });
   }
 
-  callbackGameView(List<CardModel> updatedVisiblePairs) {
+  callbackGameView(List<TileModel> updatedVisiblePairs) {
     widget.callbackMain(false);
     setState(() {
       visiblePairs = updatedVisiblePairs;
@@ -66,7 +69,7 @@ class _GameViewState extends State<GameView> {
               children: List.generate(
                 visiblePairs.length,
                 (index) {
-                  return CardView(
+                  return TileView(
                     visiblePairs: visiblePairs,
                     callbackGameView: callbackGameView,
                     index: index,

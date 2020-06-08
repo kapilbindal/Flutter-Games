@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:memory_monarch/data/data.dart';
-import 'package:memory_monarch/homePage.dart';
+import 'package:memory_monarch/utils/constants/colors.dart';
+import 'package:memory_monarch/utils/constants/strings.dart';
+import 'package:memory_monarch/views/home/homePage.dart';
 
 class GameOverView extends StatelessWidget {
   Function callbackGameView;
@@ -10,7 +12,7 @@ class GameOverView extends StatelessWidget {
     var width = MediaQuery.of(context).size.width;
 
     return Container(
-      height: 350.0,
+      height: 330.0,
       width: width,
       margin: EdgeInsets.symmetric(horizontal: 10.0),
       child: Card(
@@ -23,18 +25,18 @@ class GameOverView extends StatelessWidget {
           children: <Widget>[
             Text(
               (flipCount == 0 && totalPoints != 800)
-                  ? "GAME OVER"
-                  : "SCORE: $viewPoints",
+                  ? Strings.game_over
+                  : Strings.score + " : $viewPoints",
               style: TextStyle(
                 fontSize: 35.0,
-                fontFamily: "geneva",
+                fontFamily: Strings.font_family,
                 color: (flipCount == 0 && totalPoints != 800)
-                    ? Colors.red
-                    : Colors.green,
+                    ? MyColors.widgetColor[Strings.choose_theme]
+                    : MyColors.widgetColor[Strings.score],
                 fontWeight: FontWeight.w800,
               ),
             ),
-            SizedBox(height: 40),
+            SizedBox(height: 70),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
@@ -46,12 +48,8 @@ class GameOverView extends StatelessWidget {
                     callbackGameView();
                   },
                   child: Text(
-                    "REPLAY",
-                    style: TextStyle(
-                      fontSize: 25.0,
-                      color: Colors.green[700],
-                      fontWeight: FontWeight.w800,
-                    ),
+                    Strings.restart,
+                    style: Theme.of(context).textTheme.button,
                   ),
                 ),
                 RaisedButton(
@@ -63,12 +61,8 @@ class GameOverView extends StatelessWidget {
                         MaterialPageRoute(builder: (context) => HomePage()));
                   },
                   child: Text(
-                    "HOME",
-                    style: TextStyle(
-                      fontSize: 25.0,
-                      color: Colors.blue[700],
-                      fontWeight: FontWeight.w800,
-                    ),
+                    Strings.return_home,
+                    style: Theme.of(context).textTheme.button,
                   ),
                 ),
               ],

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:memory_monarch/customCardView.dart';
 import 'package:memory_monarch/data/data.dart';
-import 'package:memory_monarch/gamePage.dart';
+import 'package:memory_monarch/utils/constants/colors.dart';
+import 'package:memory_monarch/utils/constants/strings.dart';
+import 'package:memory_monarch/views/game/gamePage.dart';
+import 'package:memory_monarch/views/home/widgets/customCardView.dart';
 
 class ChooseThemeView extends StatelessWidget {
   @override
@@ -16,45 +18,38 @@ class ChooseThemeView extends StatelessWidget {
             height: 75,
             width: width,
             backColor: Colors.black87,
-            text: "CHOOSE YOUR THEME",
+            text: Strings.choose_theme,
             fontSize: 25.0,
-            fontFamily: "geneva",
-            fontColor: Colors.red,
+            fontColor: MyColors.widgetColor[Strings.choose_theme],
           ),
-          GestureDetector(
+          InkWell(
             onTap: () {
-              theme = "zoo";
+              theme = Strings.theme_zoo;
               Navigator.of(context)
                   .push(MaterialPageRoute(builder: (context) => GamePage()));
             },
             child: CustomCardView(
               height: 150,
               width: width,
-              backColor: Colors.white,
               showTile: true,
               tileColor: Colors.green,
-              text: "ZOOTOPIA",
-              fontSize: 35.0,
-              fontFamily: "geneva",
-              fontColor: Colors.brown[900],
+              text: Strings.theme_zoo,
+              fontColor: MyColors.widgetColor[Strings.theme_zoo],
             ),
           ),
-          GestureDetector(
+          InkWell(
             onTap: () {
-              theme = "hum tum";
+              theme = Strings.theme_hum_tum;
               Navigator.of(context)
                   .push(MaterialPageRoute(builder: (context) => GamePage()));
             },
             child: CustomCardView(
               height: 150,
               width: width,
-              backColor: Colors.white,
               showTile: true,
               tileColor: Colors.amber,
-              text: "HUM TUM",
-              fontSize: 35.0,
-              fontFamily: "geneva",
-              fontColor: Colors.pink[800],
+              text: Strings.theme_hum_tum,
+              fontColor: MyColors.widgetColor[Strings.theme_hum_tum],
             ),
           ),
         ],

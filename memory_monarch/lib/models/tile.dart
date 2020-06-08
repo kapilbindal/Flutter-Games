@@ -1,9 +1,9 @@
-class CardModel {
+class TileModel {
   String imagePath;
   bool isSelected;
   bool isMatched;
 
-  CardModel({this.imagePath, this.isSelected, this.isMatched});
+  TileModel({this.imagePath, this.isSelected, this.isMatched});
 
   void setImagePath(String imgPath) {
     imagePath = imgPath;

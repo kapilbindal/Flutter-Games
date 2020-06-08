@@ -2,32 +2,36 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:memory_monarch/data/data.dart';
-import 'package:memory_monarch/models/card.dart';
+import 'package:memory_monarch/models/tile.dart';
+import 'package:memory_monarch/utils/constants/strings.dart';
 
-class CardView extends StatefulWidget {
+class TileView extends StatefulWidget {
   int index;
-  List<CardModel> visiblePairs;
+  List<TileModel> visiblePairs;
   Function callbackGameView;
 
-  CardView({
+  TileView({
     this.index,
     this.visiblePairs,
     this.callbackGameView,
   });
 
   @override
-  _CardViewState createState() => _CardViewState();
+  _TileViewState createState() => _TileViewState();
 }
 
-class _CardViewState extends State<CardView> {
+class _TileViewState extends State<TileView> {
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
+    TileModel currentTile = widget.visiblePairs[widget.index];
+
+    return InkWell(
+      customBorder: new CircleBorder(),
       onTap: () {
         if (allowClick) {
           // open Card
           setState(() {
-            widget.visiblePairs[widget.index].setIsSelected(true);
+            currentTile.setIsSelected(true);
           });
           // One Card opened
           if (selectedImagePath.length != 0 &&
@@ -37,25 +41,25 @@ class _CardViewState extends State<CardView> {
             Future.delayed(const Duration(seconds: 1), () {
               allowClick = true;
               // Matched
-              if (selectedImagePath ==
-                      widget.visiblePairs[widget.index].imagePath ||
-                  selectedImagePath.substring(selectedImagePath.length - 5,
-                          selectedImagePath.length - 4) ==
-                      widget.visiblePairs[widget.index].imagePath.substring(
-                          widget.visiblePairs[widget.index].imagePath.length -
-                              5,
-                          widget.visiblePairs[widget.index].imagePath.length -
-                              4)) {
+              if ((theme == Strings.theme_zoo &&
+                      selectedImagePath == currentTile.imagePath) ||
+                  //check for last number in the name for "HUM TUM" theme
+                  (theme == Strings.theme_hum_tum &&
+                      selectedImagePath.substring(selectedImagePath.length - 5,
+                              selectedImagePath.length - 4) ==
+                          currentTile.imagePath.substring(
+                              currentTile.imagePath.length - 5,
+                              currentTile.imagePath.length - 4))) {
                 totalPoints += 100;
                 viewPoints += 100;
                 widget.visiblePairs[selectedImageIndex].setIsMatched(true);
-                widget.visiblePairs[widget.index].setIsMatched(true);
+                currentTile.setIsMatched(true);
               }
               //Not Matched
               else {
                 viewPoints = max(0, viewPoints - 10);
                 widget.visiblePairs[selectedImageIndex].setIsSelected(false);
-                widget.visiblePairs[widget.index].setIsSelected(false);
+                currentTile.setIsSelected(false);
               }
               // Callback for the change happened after "Future"
               widget.callbackGameView(widget.visiblePairs);
@@ -64,21 +68,21 @@ class _CardViewState extends State<CardView> {
           }
           // No card Open
           else {
-            selectedImagePath = widget.visiblePairs[widget.index].imagePath;
+            selectedImagePath = currentTile.imagePath;
             selectedImageIndex = widget.index;
           }
           if (totalPoints == 800 || flipCount == 0) allowClick = false;
         }
       },
-      child: widget.visiblePairs[widget.index].isMatched
+      child: currentTile.isMatched
           ? Container()
           : Container(
               //color: Colors.black26,
               margin: EdgeInsets.all(5.0),
               child: ClipOval(
                 child: Image.asset(
-                  widget.visiblePairs[widget.index].isSelected
-                      ? widget.visiblePairs[widget.index].imagePath
+                  currentTile.isSelected
+                      ? currentTile.imagePath
                       : hideImagePath,
                   fit: BoxFit.cover,
                 ),

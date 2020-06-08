@@ -1,10 +1,6 @@
-import 'dart:async';
-import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'package:memory_monarch/customCardView.dart';
-import 'package:memory_monarch/data/data.dart';
-import 'package:memory_monarch/gameView.dart';
-import 'package:memory_monarch/models/chooseThemeView.dart';
+import 'package:memory_monarch/utils/constants/strings.dart';
+import 'package:memory_monarch/views/home/widgets/chooseThemeView.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -20,16 +16,9 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "Memory Monarch",
-          style: TextStyle(
-            fontFamily: "serif",
-            fontWeight: FontWeight.w800,
-            fontSize: 25.0,
-            color: Colors.brown[700],
-          ),
+          Strings.app_name,
         ),
         centerTitle: true,
-        backgroundColor: Color(0xFFffa100),
       ),
       body: Container(
         height: height,
@@ -37,7 +26,7 @@ class _HomePageState extends State<HomePage> {
         padding: EdgeInsets.symmetric(vertical: 20, horizontal: 10),
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage("assets/animals/back.png"),
+            image: AssetImage(Strings.background_img_path),
             fit: BoxFit.cover,
           ),
         ),
